@@ -1,6 +1,10 @@
 package com.cg.order.orderservice.orders.address;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class Address {
+	private Integer customerId;
 	private String fullName;
 	private String mobileNumber;
 	private Integer flatNumber;
@@ -11,17 +15,12 @@ public class Address {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Address(String fullName, String mobileNumber, Integer flatNumber, String city, Integer pincode,
-			String state) {
-		super();
-		this.fullName = fullName;
-		this.mobileNumber = mobileNumber;
-		this.flatNumber = flatNumber;
-		this.city = city;
-		this.pincode = pincode;
-		State = state;
+	public Integer getCustomerId() {
+		return customerId;
 	}
-	
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
+	}
 	public String getFullName() {
 		return fullName;
 	}
@@ -58,12 +57,23 @@ public class Address {
 	public void setState(String state) {
 		State = state;
 	}
+	public Address(Integer customerId, String fullName, String mobileNumber, Integer flatNumber, String city,
+			Integer pincode, String state) {
+		super();
+		this.customerId = customerId;
+		this.fullName = fullName;
+		this.mobileNumber = mobileNumber;
+		this.flatNumber = flatNumber;
+		this.city = city;
+		this.pincode = pincode;
+		State = state;
+	}
 	@Override
 	public String toString() {
-		return "Address [fullName=" + fullName + ", mobileNumber=" + mobileNumber + ", flatNumber=" + flatNumber
-				+ ", city=" + city + ", pincode=" + pincode + ", State=" + State + "]";
+		return "Address [customerId=" + customerId + ", fullName=" + fullName + ", mobileNumber=" + mobileNumber
+				+ ", flatNumber=" + flatNumber + ", city=" + city + ", pincode=" + pincode + ", State=" + State + "]";
 	}
-
+	
 
 	
 }
