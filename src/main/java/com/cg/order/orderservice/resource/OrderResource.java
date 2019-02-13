@@ -1,6 +1,5 @@
 package com.cg.order.orderservice.resource;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.cg.order.orderservice.cart.Cart;
 import com.cg.order.orderservice.orders.Orders;
-import com.cg.order.orderservice.orders.address.Address;
-import com.cg.order.orderservice.orders.product.Product;
 import com.cg.order.orderservice.orders.service.OrderService;
 
 @RestController
@@ -28,7 +27,7 @@ public class OrderResource {
 	@Autowired
 	private OrderService orderService;
 
-	private static int orderId =0;
+	
 	
 	@GetMapping
 	public List<Orders> getAllOrders() {
@@ -44,21 +43,24 @@ public class OrderResource {
 
 		return new ResponseEntity(HttpStatus.OK);
 	}
-
-	@PostMapping
-	public void placeOrder(@RequestBody Orders newOrder) {
-		newOrder.setOrderId(orderId++);
 	
-	
-			orderService.placeOrder(newOrder);
-	}
+	  @PostMapping public void placeOrder(@RequestBody Cart cart) {
+	  
+	  
+	  
+	  orderService.placeOrder(cart);
+	  }
+	 
 
 	/*
-	 * @PutMapping public void changeStatus(@RequestBody Orders orders) {
-	 * orderService.changeStatus(orders);
+	 * @PostMapping public void placeOrder(@RequestBody Orders orders) {
 	 * 
-	 * }
+	 * 
+	 * 
+	 * orderService.placeOrder(orders); }
 	 */
+
+	
 
 	@PutMapping("/{orderId}")
 	public void changeOrderStatus(@RequestParam String orderStatus, @PathVariable int orderId) {

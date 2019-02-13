@@ -1,24 +1,30 @@
 package com.cg.order.orderservice.orders;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.cg.order.orderservice.orders.address.Address;
 import com.cg.order.orderservice.orders.product.Product;
+import com.fasterxml.jackson.annotation.JsonFormat;
 @Document
 public class Orders {
 
 	@Id
 	private int orderId;
-	private LocalDateTime orderDate;
+	@DateTimeFormat(iso = ISO.DATE, pattern = "yyyy-MM-dd")
+	private LocalDate orderDate;
 	private Integer customerId;
 	private double ammountPaid;
 	private String modeOfPayment;
 	private String orderStatus;
 	private int quantity;
+
 
 	private Address address;
 
@@ -26,26 +32,13 @@ public class Orders {
 
 	public Orders() {
 		super();
-		
+		// TODO Auto-generated constructor stub
 	}
 
-	public Orders(int orderId, LocalDateTime orderDate, Integer customerId, double ammountPaid, String modeOfPayment,
+	public Orders(int orderId, LocalDate orderDate, Integer customerId, double ammountPaid, String modeOfPayment,
 			String orderStatus, int quantity, Address address, Product product) {
 		super();
 		this.orderId = orderId;
-		this.orderDate = orderDate;
-		this.customerId = customerId;
-		this.ammountPaid = ammountPaid;
-		this.modeOfPayment = modeOfPayment;
-		this.orderStatus = orderStatus;
-		this.quantity = quantity;
-		this.address = address;
-		this.product = product;
-	}
-
-	public Orders(LocalDateTime orderDate, Integer customerId, double ammountPaid, String modeOfPayment,
-			String orderStatus, int quantity, Address address, Product product) {
-		super();
 		this.orderDate = orderDate;
 		this.customerId = customerId;
 		this.ammountPaid = ammountPaid;
@@ -64,11 +57,11 @@ public class Orders {
 		this.orderId = orderId;
 	}
 
-	public LocalDateTime getOrderDate() {
+	public LocalDate getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(LocalDateTime orderDate) {
+	public void setOrderDate(LocalDate orderDate) {
 		this.orderDate = orderDate;
 	}
 
@@ -134,7 +127,9 @@ public class Orders {
 				+ ", ammountPaid=" + ammountPaid + ", modeOfPayment=" + modeOfPayment + ", orderStatus=" + orderStatus
 				+ ", quantity=" + quantity + ", address=" + address + ", product=" + product + "]";
 	}
+
 	
 	
+
 
 }

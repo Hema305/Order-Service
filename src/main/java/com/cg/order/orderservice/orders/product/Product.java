@@ -2,14 +2,14 @@ package com.cg.order.orderservice.orders.product;
 
 public class Product {
 	private String productId;
-	private Integer productName;
+	private String productName;
 
 	public Product() {
 		super();
 
 	}
 
-	public Product(String productId, Integer productName) {
+	public Product(String productId, String productName) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
@@ -23,11 +23,11 @@ public class Product {
 		this.productId = productId;
 	}
 
-	public Integer getProductName() {
+	public String getProductName() {
 		return productName;
 	}
 
-	public void setProductName(Integer productName) {
+	public void setProductName(String productName) {
 		this.productName = productName;
 	}
 

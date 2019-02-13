@@ -43,7 +43,7 @@ public class OrderServiceImplTest {
 		assertEquals(4, orders.size());
 	}
 	@Test
-	public void chaneStatusTest() {
+	public void changeStatusTest() {
 	
 		
 	String status=orderService.changeStatus("come", 1);
@@ -52,29 +52,32 @@ public class OrderServiceImplTest {
 		 
 		 
 	}
-	@Test
-	public void getByIDPresentTest() {
-	
-		
-		Optional<Orders> orders=orderService.getOrderById(2);
-	
-		assertEquals(true, orders.isPresent());
-		 
-		 
-	}
-	@Test
-	public void getByIDNotPresentTest() {
-	
-		
-		Optional<Orders> orders=orderService.getOrderById(120);
-	
-		assertEquals(false, orders.isPresent());
-		 
-		 
-	}
-	@Test
 
-	public void placeOrderTest() {
+	/*
+	 * @Test public void getByIDPresentTest() {
+	 * 
+	 * 
+	 * Optional<Orders> orders=orderService.getOrderById(2);
+	 * 
+	 * assertEquals(true, orders.isPresent());
+	 * 
+	 * 
+	 * }
+	 */
+	/*
+	 * @Test public void getByIDNotPresentTest() {
+	 * 
+	 * 
+	 * Optional<Orders> orders=orderService.getOrderById(120);
+	 * 
+	 * assertEquals(false, orders.isPresent());
+	 * 
+	 * 
+	 * }
+	 */
+	//@Test
+
+/*	public void placeOrderTest() {
 		
 	
 		Orders orders = new Orders(LocalDateTime.now(), 343, 600, "cash","arive soon", 1,new Address("hima", 232323, 17, "noida", 788099, "UP"),new Product("bottle", 123));
@@ -82,7 +85,7 @@ public class OrderServiceImplTest {
 		Optional<Orders> orderId=orderService.getOrderById(4);
 		assertEquals(true, orderId.isPresent());
 		 
-	}
+	}*/
 	/*
 	 * @Test public void placeOrderFailTest() {
 	 * 
