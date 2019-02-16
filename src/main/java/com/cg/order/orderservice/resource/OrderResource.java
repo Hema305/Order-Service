@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.cg.order.orderservice.cart.Cart;
 import com.cg.order.orderservice.orders.Orders;
 import com.cg.order.orderservice.orders.address.Address;
@@ -33,6 +32,11 @@ public class OrderResource {
 		return orderService.getAllOrders();
 	}
 
+	@GetMapping("/address")
+	public List<Address> getAllAddress() {
+		return orderService.getAllAddress();
+	}
+
 	/*
 	 * @GetMapping("/{orderId}") public ResponseEntity getOrderById(@PathVariable
 	 * int orderId) {
@@ -44,9 +48,9 @@ public class OrderResource {
 	 * return new ResponseEntity(HttpStatus.OK); }
 	 */
 
-	@GetMapping("/{customerId}")
+	@GetMapping("/order/{customerId}")
 	public List<Orders> getOrderByCustomerId(@PathVariable int customerId) {
-		List<Orders> orders = orderService.getOrderByCustomerId(customerId); 
+		List<Orders> orders = orderService.getOrderByCustomerId(customerId);
 		// Orders orders =optionalOrders.get();
 		return orders;
 	}
@@ -56,6 +60,13 @@ public class OrderResource {
 		List<Address> address = orderService.getAddressByCustomerId(customerId);
 		// Orders orders = optionalOrders.get();
 		return address;
+	}
+
+	@GetMapping("/orderId")
+	public Orders findMAXByOrderId() {
+
+		Orders orders = orderService.getOrderById();
+		return orders;
 	}
 
 	/*
@@ -73,8 +84,6 @@ public class OrderResource {
 	/*
 	 * @PostMapping public void placeOrder(@RequestBody Orders orders) {
 	 * 
-	 * 
-	 * 
 	 * orderService.placeOrder(orders); }
 	 */
 
@@ -90,15 +99,15 @@ public class OrderResource {
 		orderService.changeStatus(orderStatus, orderId);
 	}
 
-	/*
-	 * @DeleteMapping("/{orderId}") public ResponseEntity<String>
-	 * deleteOrder(@PathVariable int orderId) { Optional<Orders> order =
-	 * orderService.getOrderById(orderId); if(!order.isPresent()) return new
-	 * ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-	 * 
-	 * orderService.deleteOrder(orderId); return new ResponseEntity(HttpStatus.OK);
-	 * 
-	 * }
-	 */
+	@DeleteMapping("/{orderId}")
+	public ResponseEntity<String> deleteOrder(@PathVariable int orderId) {
+		Optional<Orders> order = orderService.getOrderById(orderId);
+		if (!order.isPresent())
+			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+
+		orderService.deleteOrder(orderId);
+		return new ResponseEntity(HttpStatus.OK);
+
+	}
 
 }
